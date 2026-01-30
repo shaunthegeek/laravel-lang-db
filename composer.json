@@ -1,0 +1,45 @@
+{
+    "name": "shaunthegeek/laravel-lang-db",
+    "description": "Manage Laravel translations in the database and export them to JSON files.",
+    "type": "library",
+    "require": {
+        "laravel/framework": ">=v10"
+    },
+    "require-dev": {
+        "pestphp/pest": "^4.3",
+        "laravel/pint": "^1.27",
+        "orchestra/testbench": ">=v8.0.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Shaunthegeek\\LaravelLangDb\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Shaunthegeek\\LaravelLangDb\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Shaun",
+            "email": "shaunthegeek@outlook.com"
+        }
+    ],
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Shaunthegeek\\LaravelLangDb\\LaravelLangDbServiceProvider"
+            ]
+        }
+    }
+}
