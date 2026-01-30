@@ -22,17 +22,17 @@ class ExportLanguages extends Command
 
         foreach ($grouped as $locale => $items) {
             $translations = $items->pluck('value', 'key')->toArray();
-            
+
             $json = json_encode($translations, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-            
+
             $path = lang_path("$locale.json");
-            
+
             // Ensure the directory exists (though lang_path usually exists, create if not)
-            // lang_path() returns path/to/lang/en.json. 
-            // We should make sure the directory of that path exists if we were writing to subdirs, 
-            // but for lang root it should be fine. 
+            // lang_path() returns path/to/lang/en.json.
+            // We should make sure the directory of that path exists if we were writing to subdirs,
+            // but for lang root it should be fine.
             // Actually, in fresh Laravel installations, lang directory might not exist or might be published.
-            if (!File::exists(dirname($path))) {
+            if (! File::exists(dirname($path))) {
                 File::makeDirectory(dirname($path), 0755, true);
             }
 

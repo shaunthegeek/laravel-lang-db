@@ -31,7 +31,7 @@ class TestCase extends Orchestra
 
     protected function defineDatabaseMigrations()
     {
-        $migration = include __DIR__ . '/../database/migrations/create_languages_table.php.stub';
+        $migration = include __DIR__.'/../database/migrations/create_languages_table.php.stub';
         $migration->up();
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
-use Shaunthegeek\LaravelLangDb\Models\Language;
 use Illuminate\Support\Facades\File;
+use Shaunthegeek\LaravelLangDb\Models\Language;
 
 it('can import language lines from json files', function () {
     // 1. Prepare files
@@ -9,7 +9,7 @@ it('can import language lines from json files', function () {
     $zhPath = lang_path('zh_CN.json');
 
     // Ensure directory exists
-    if (!File::exists(dirname($enPath))) {
+    if (! File::exists(dirname($enPath))) {
         File::makeDirectory(dirname($enPath), 0755, true);
     }
 
@@ -25,16 +25,20 @@ it('can import language lines from json files', function () {
     expect(Language::where('locale', 'zh_CN')->where('key', 'messages.hello')->first()->value)->toBe('你好世界');
 
     // Cleanup
-    if (File::exists($enPath)) File::delete($enPath);
-    if (File::exists($zhPath)) File::delete($zhPath);
+    if (File::exists($enPath)) {
+        File::delete($enPath);
+    }
+    if (File::exists($zhPath)) {
+        File::delete($zhPath);
+    }
 });
 
 it('can overwrite existing language lines during import', function () {
     // 1. Prepare data and files
     Language::create(['locale' => 'en', 'key' => 'messages.hello', 'value' => 'Old Value']);
-    
+
     $enPath = lang_path('en.json');
-    if (!File::exists(dirname($enPath))) {
+    if (! File::exists(dirname($enPath))) {
         File::makeDirectory(dirname($enPath), 0755, true);
     }
     File::put($enPath, json_encode(['messages.hello' => 'New Value']));
@@ -47,15 +51,17 @@ it('can overwrite existing language lines during import', function () {
     expect(Language::where('locale', 'en')->where('key', 'messages.hello')->first()->value)->toBe('New Value');
 
     // Cleanup
-    if (File::exists($enPath)) File::delete($enPath);
+    if (File::exists($enPath)) {
+        File::delete($enPath);
+    }
 });
 
 it('does not overwrite existing language lines without overwrite option', function () {
     // 1. Prepare data and files
     Language::create(['locale' => 'en', 'key' => 'messages.hello', 'value' => 'Original Value']);
-    
+
     $enPath = lang_path('en.json');
-    if (!File::exists(dirname($enPath))) {
+    if (! File::exists(dirname($enPath))) {
         File::makeDirectory(dirname($enPath), 0755, true);
     }
     File::put($enPath, json_encode(['messages.hello' => 'New Value']));
@@ -68,5 +74,7 @@ it('does not overwrite existing language lines without overwrite option', functi
     expect(Language::where('locale', 'en')->where('key', 'messages.hello')->first()->value)->toBe('Original Value');
 
     // Cleanup
-    if (File::exists($enPath)) File::delete($enPath);
+    if (File::exists($enPath)) {
+        File::delete($enPath);
+    }
 });

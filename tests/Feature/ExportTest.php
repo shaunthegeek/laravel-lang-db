@@ -1,7 +1,7 @@
 <?php
 
-use Shaunthegeek\LaravelLangDb\Models\Language;
 use Illuminate\Support\Facades\File;
+use Shaunthegeek\LaravelLangDb\Models\Language;
 
 it('can export language lines to json files', function () {
     // 1. Create data
@@ -31,8 +31,12 @@ it('can export language lines to json files', function () {
     expect($zhContent)->toMatchArray([
         'messages.welcome' => '欢迎',
     ]);
-    
+
     // Cleanup
-    if (File::exists($enPath)) File::delete($enPath);
-    if (File::exists($zhPath)) File::delete($zhPath);
+    if (File::exists($enPath)) {
+        File::delete($enPath);
+    }
+    if (File::exists($zhPath)) {
+        File::delete($zhPath);
+    }
 });

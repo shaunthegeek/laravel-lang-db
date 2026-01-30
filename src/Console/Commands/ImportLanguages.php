@@ -24,8 +24,9 @@ class ImportLanguages extends Command
 
             $content = json_decode(File::get($file), true);
 
-            if (!is_array($content)) {
+            if (! is_array($content)) {
                 $this->error("Invalid JSON in $locale.json");
+
                 continue;
             }
 
