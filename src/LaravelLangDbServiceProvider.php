@@ -4,6 +4,7 @@ namespace Shaunthegeek\LaravelLangDb;
 
 use Illuminate\Support\ServiceProvider;
 use Shaunthegeek\LaravelLangDb\Console\Commands\ExportLanguages;
+use Shaunthegeek\LaravelLangDb\Console\Commands\ImportLanguages;
 
 class LaravelLangDbServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,7 @@ class LaravelLangDbServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 ExportLanguages::class,
+                ImportLanguages::class,
             ]);
 
             $this->publishes([

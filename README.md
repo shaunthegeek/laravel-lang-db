@@ -17,14 +17,26 @@ php artisan vendor:publish --tag=laravel-lang-db-migrations
 php artisan migrate
 ```
 
-2. Add translations to the `languages` table, either by directly operating the database or via the admin interface (e.g., FilamentPHP).
+2. Import translations from `/lang` directory to database:
+
+```bash
+php artisan lang:import
+```
+
+This will read all `.json` files in `/lang` and populate the database. By default, it skips existing keys. Use `--force` to update existing records:
+
+```bash
+php artisan lang:import --force
+```
+
+3. Add translations to the `languages` table, either by directly operating the database or via the admin interface (e.g., FilamentPHP).
 
 | locale | key | value |
 |---|---|---|
 | en | messages.welcome | Welcome |
 | zh_CN | messages.welcome | 欢迎 |
 
-3. Export translations to `/lang` directory:
+4. Export translations to `/lang` directory:
 
 ```bash
 php artisan lang:export
