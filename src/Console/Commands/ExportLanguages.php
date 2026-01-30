@@ -36,7 +36,7 @@ class ExportLanguages extends Command
                 File::makeDirectory(dirname($path), 0755, true);
             }
 
-            File::put($path, $json);
+            File::put($path, $json.PHP_EOL);
 
             $this->info("Exported $locale.json");
         }
